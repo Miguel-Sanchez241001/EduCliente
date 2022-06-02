@@ -1,0 +1,21 @@
+html,body{
+    margin: 0;
+    background-color: #2f2f2f;
+    color: white;
+}
+
+div{
+    padding: 15px
+}
+.titulo{
+    text-align: center;
+    background-color: black;
+    color: white;
+    font-size: 25px;
+    padding: 20px;
+}
+.linkUrl {
+
+width: 150px;
+
+}

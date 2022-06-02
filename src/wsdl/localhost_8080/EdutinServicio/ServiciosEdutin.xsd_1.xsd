@@ -1,0 +1,307 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://edutinservicio.edutin.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://edutinservicio.edutin.com/">
+
+<xs:element name="BuscarAlumno" type="tns:BuscarAlumno"/>
+
+<xs:element name="BuscarAlumnoResponse" type="tns:BuscarAlumnoResponse"/>
+
+<xs:element name="BuscarDocente" type="tns:BuscarDocente"/>
+
+<xs:element name="BuscarDocenteResponse" type="tns:BuscarDocenteResponse"/>
+
+<xs:element name="BuscarMateria" type="tns:BuscarMateria"/>
+
+<xs:element name="BuscarMateriaResponse" type="tns:BuscarMateriaResponse"/>
+
+<xs:element name="BuscarNota" type="tns:BuscarNota"/>
+
+<xs:element name="BuscarNotaResponse" type="tns:BuscarNotaResponse"/>
+
+<xs:element name="Listar" type="tns:Listar"/>
+
+<xs:element name="ListarAlumnos" type="tns:ListarAlumnos"/>
+
+<xs:element name="ListarAlumnosResponse" type="tns:ListarAlumnosResponse"/>
+
+<xs:element name="ListarDocentes" type="tns:ListarDocentes"/>
+
+<xs:element name="ListarDocentesResponse" type="tns:ListarDocentesResponse"/>
+
+<xs:element name="ListarMaterias" type="tns:ListarMaterias"/>
+
+<xs:element name="ListarMateriasResponse" type="tns:ListarMateriasResponse"/>
+
+<xs:element name="ListarNotas" type="tns:ListarNotas"/>
+
+<xs:element name="ListarNotasResponse" type="tns:ListarNotasResponse"/>
+
+<xs:element name="ListarResponse" type="tns:ListarResponse"/>
+
+<xs:element name="Loguear" type="tns:Loguear"/>
+
+<xs:element name="LoguearResponse" type="tns:LoguearResponse"/>
+
+<xs:element name="Registrar" type="tns:Registrar"/>
+
+<xs:element name="RegistrarAlumno" type="tns:RegistrarAlumno"/>
+
+<xs:element name="RegistrarAlumnoResponse" type="tns:RegistrarAlumnoResponse"/>
+
+<xs:element name="RegistrarDocente" type="tns:RegistrarDocente"/>
+
+<xs:element name="RegistrarDocenteResponse" type="tns:RegistrarDocenteResponse"/>
+
+<xs:element name="RegistrarMateria" type="tns:RegistrarMateria"/>
+
+<xs:element name="RegistrarMateriaResponse" type="tns:RegistrarMateriaResponse"/>
+
+<xs:element name="RegistrarMensaje" type="tns:RegistrarMensaje"/>
+
+<xs:element name="RegistrarMensajeResponse" type="tns:RegistrarMensajeResponse"/>
+
+<xs:element name="RegistrarNota" type="tns:RegistrarNota"/>
+
+<xs:element name="RegistrarNotaResponse" type="tns:RegistrarNotaResponse"/>
+
+<xs:element name="RegistrarResponse" type="tns:RegistrarResponse"/>
+
+<xs:complexType name="RegistrarMateria">
+<xs:sequence>
+<xs:element name="Materia" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="RegistrarMateriaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="RegistrarDocente">
+<xs:sequence>
+<xs:element name="Usuario" type="xs:int"/>
+<xs:element name="Materia" type="xs:int"/>
+<xs:element name="nombre" type="xs:string" minOccurs="0"/>
+<xs:element name="apellido" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="RegistrarDocenteResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="BuscarAlumno">
+<xs:sequence>
+<xs:element name="idAlumno" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="BuscarAlumnoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:alumno" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="alumno">
+<xs:sequence>
+<xs:element name="apellido" type="xs:string" minOccurs="0"/>
+<xs:element name="edad" type="xs:int" minOccurs="0"/>
+<xs:element name="idAlumnos" type="xs:int" minOccurs="0"/>
+<xs:element name="idDocente" type="tns:docente" minOccurs="0"/>
+<xs:element name="idUser" type="tns:usuario" minOccurs="0"/>
+<xs:element name="nombre" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="docente">
+<xs:sequence>
+<xs:element name="apellido" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="materia" type="tns:materia" minOccurs="0"/>
+<xs:element name="nombre" type="xs:string" minOccurs="0"/>
+<xs:element name="usuario" type="tns:usuario" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="materia">
+<xs:sequence>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="materia" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="usuario">
+<xs:sequence>
+<xs:element name="clave" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="tipo" type="xs:int" minOccurs="0"/>
+<xs:element name="username" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="RegistrarMensaje">
+<xs:sequence>
+<xs:element name="nombre" type="xs:string" minOccurs="0"/>
+<xs:element name="mensaje" type="xs:string" minOccurs="0"/>
+<xs:element name="Destinatario" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="RegistrarMensajeResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Listar">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="ListarResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:usuario" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ListarMaterias">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="ListarMateriasResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:materia" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Loguear">
+<xs:sequence>
+<xs:element name="UserName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="LoguearResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:usuario" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ListarAlumnos">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="ListarAlumnosResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:alumno" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="BuscarDocente">
+<xs:sequence>
+<xs:element name="idDocente" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="BuscarDocenteResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:docente" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ListarNotas">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="ListarNotasResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:nota" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="nota">
+<xs:sequence>
+<xs:element name="alumno" type="tns:alumno" minOccurs="0"/>
+<xs:element name="idCurso" type="tns:materia" minOccurs="0"/>
+<xs:element name="idNotas" type="xs:int" minOccurs="0"/>
+<xs:element name="nota" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Registrar">
+<xs:sequence>
+<xs:element name="UserName" type="xs:string" minOccurs="0"/>
+<xs:element name="Clave" type="xs:string" minOccurs="0"/>
+<xs:element name="Tipo" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="RegistrarResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="BuscarMateria">
+<xs:sequence>
+<xs:element name="idMateria" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="BuscarMateriaResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:materia" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ListarDocentes">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="ListarDocentesResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:docente" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="RegistrarAlumno">
+<xs:sequence>
+<xs:element name="Docente" type="xs:int"/>
+<xs:element name="Nombre" type="xs:string" minOccurs="0"/>
+<xs:element name="apellido" type="xs:string" minOccurs="0"/>
+<xs:element name="Edad" type="xs:int" minOccurs="0"/>
+<xs:element name="Usuario" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="RegistrarAlumnoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="RegistrarNota">
+<xs:sequence>
+<xs:element name="Materia" type="xs:int"/>
+<xs:element name="Alumno" type="xs:int"/>
+<xs:element name="nota" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="RegistrarNotaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="BuscarNota">
+<xs:sequence>
+<xs:element name="idNota" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="BuscarNotaResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:nota" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
