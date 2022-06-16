@@ -1,0 +1,20 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 14/06/2022, 08:46:34 PM
+    Author     : pc
+*/
+
+#div1 > h1{
+   
+   padding-left: 150px;
+    color:white;
+    padding-top: 25px;
+}
+body{
+    background-color:  #95969A; 
+    font-family: 'Kdam Thmor Pro', sans-serif;
+}

@@ -1,2 +1,2 @@
- *.xml
+/target/
 /src/main/webapp/img/.
