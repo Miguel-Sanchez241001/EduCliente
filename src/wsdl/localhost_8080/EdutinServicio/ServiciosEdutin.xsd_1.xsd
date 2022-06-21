@@ -26,6 +26,10 @@
 
 <xs:element name="ListarDocentesResponse" type="tns:ListarDocentesResponse"/>
 
+<xs:element name="ListarFabrica" type="tns:ListarFabrica"/>
+
+<xs:element name="ListarFabricaResponse" type="tns:ListarFabricaResponse"/>
+
 <xs:element name="ListarMaterias" type="tns:ListarMaterias"/>
 
 <xs:element name="ListarMateriasResponse" type="tns:ListarMateriasResponse"/>
@@ -71,21 +75,6 @@
 </xs:complexType>
 
 <xs:complexType name="RegistrarMateriaResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="RegistrarDocente">
-<xs:sequence>
-<xs:element name="Usuario" type="xs:int"/>
-<xs:element name="Materia" type="xs:int"/>
-<xs:element name="nombre" type="xs:string" minOccurs="0"/>
-<xs:element name="apellido" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="RegistrarDocenteResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
@@ -140,6 +129,21 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="RegistrarDocente">
+<xs:sequence>
+<xs:element name="Usuario" type="xs:int"/>
+<xs:element name="Materia" type="xs:int"/>
+<xs:element name="nombre" type="xs:string" minOccurs="0"/>
+<xs:element name="apellido" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="RegistrarDocenteResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="RegistrarMensaje">
 <xs:sequence>
 <xs:element name="nombre" type="xs:string" minOccurs="0"/>
@@ -161,6 +165,18 @@
 <xs:complexType name="ListarResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:usuario" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ListarFabrica">
+<xs:sequence>
+<xs:element name="Tipo" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ListarFabricaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -227,6 +243,18 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="BuscarMateria">
+<xs:sequence>
+<xs:element name="idMateria" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="BuscarMateriaResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:materia" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="Registrar">
 <xs:sequence>
 <xs:element name="UserName" type="xs:string" minOccurs="0"/>
@@ -238,18 +266,6 @@
 <xs:complexType name="RegistrarResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="BuscarMateria">
-<xs:sequence>
-<xs:element name="idMateria" type="xs:int" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="BuscarMateriaResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:materia" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

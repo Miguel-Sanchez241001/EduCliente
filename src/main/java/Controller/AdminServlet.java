@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Chat.Servidor;
 import ValidSesion.ValidSession;
 import java.io.IOException;
 
@@ -16,6 +17,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.WebServiceRef;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
 import ws.Alumno;
 import ws.Docente;
 import ws.Materia;
@@ -32,6 +35,7 @@ public class AdminServlet extends HttpServlet {
 
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/EdutinServicio/ServiciosEdutin.wsdl")
     private ServiciosEdutin_Service service;
+    public static Logger logger = Logger.getLogger(AdminServlet.class);
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,24 +47,25 @@ public class AdminServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        BasicConfigurator.configure();
         ValidSession.validAdmin(request, response);
         String userName, clave, respuesta, nombre, apellido, opcionRegistrarTipo, DocenteN;
-      
 
         int idMateria;
         Integer edad;
         List<Usuario> usuarios = listar();
         List<Alumno> alumnos = listarAlumnos();
         List<Docente> docentes = listarDocentes();
-        List<Nota> notas = listarNotas();
-        List<Materia> materias = listarMaterias();
+        //List<Nota> notas = listarNotas();
+        List<Nota> notas = (List<Nota>) ListaDeFabrica("Nota");
+        // List<Materia> materias = listarMaterias();
+        List<Materia> materias = (List<Materia>) ListaDeFabrica("Materia");
         String opcionLista = request.getParameter("opLis");
         String opcionRegistrar = request.getParameter("opReg");
         opcionRegistrarTipo = request.getParameter("tipo");
 
         for (Docente docente : docentes) {
-            System.out.println(" " + docente.getId() + " " + docente.getNombre() + " " + docente.getApellido());
+            logger.info(" " + docente.getId() + " " + docente.getNombre() + " " + docente.getApellido());
         }
 
         if (opcionLista != null) {
@@ -120,8 +125,8 @@ public class AdminServlet extends HttpServlet {
                     idMateria = Integer.parseInt(request.getParameter("Materia"));
                     System.out.println(" " + nombre + " " + apellido + " " + idMateria + " ");
                     respuesta = registrarDocente(loguear(userName).getId(), idMateria, nombre, apellido);
-                    docentes = listarDocentes();    
-                    System.out.println(respuesta);
+                    docentes = listarDocentes();
+                    logger.info(respuesta);
                     request.setAttribute("lista", docentes);
                     request.setAttribute("message", "3");
                     break;
@@ -129,13 +134,13 @@ public class AdminServlet extends HttpServlet {
                     userName = request.getParameter("Username");
                     clave = request.getParameter("password");
                     respuesta = registrar(userName, clave, 3);
-                    System.out.println(respuesta);
+                    logger.info(respuesta);
 
                     nombre = request.getParameter("Nombre");
                     apellido = request.getParameter("Apellido");
                     edad = Integer.parseInt(request.getParameter("pena"));
                     DocenteN = request.getParameter("Edad");
-                    System.out.println(" " + nombre + " " + apellido + " " + edad + " " + DocenteN);
+                    logger.info(" " + nombre + " " + apellido + " " + edad + " " + DocenteN);
                     registrarAlumno(Integer.parseInt(DocenteN), nombre, apellido, edad, loguear(userName).getId());
                     alumnos = listarAlumnos();
                     request.setAttribute("lista", alumnos);
@@ -187,116 +192,68 @@ public class AdminServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }// </editor-fold>// </editor-fold>
 
- 
-   
-  
-   
- 
-   
+    private List<?> ListaDeFabrica(java.lang.String Tipo) {
+        ws.ServiciosEdutin port = service.getServiciosEdutinPort();
+        return port.listarFabrica(Tipo);
+    }
 
-   
-    private  String registrarDocente(int usuario, int materia, java.lang.String nombre, java.lang.String apellido) {
-       
+    private String registrarDocente(int usuario, int materia, java.lang.String nombre, java.lang.String apellido) {
+
         ws.ServiciosEdutin port = service.getServiciosEdutinPort();
         return port.registrarDocente(usuario, materia, nombre, apellido);
     }
 
-    private  String registrarAlumno(int docente, java.lang.String nombre, java.lang.String apellido, java.lang.Integer edad, int usuario) {
-      
+    private String registrarAlumno(int docente, java.lang.String nombre, java.lang.String apellido, java.lang.Integer edad, int usuario) {
+
         ws.ServiciosEdutin port = service.getServiciosEdutinPort();
         return port.registrarAlumno(docente, nombre, apellido, edad, usuario);
     }
 
-    private  Usuario loguear(java.lang.String userName) {
-        
+    private Usuario loguear(java.lang.String userName) {
+
         ws.ServiciosEdutin port = service.getServiciosEdutinPort();
         return port.loguear(userName);
     }
 
-    private  String registrar(java.lang.String userName, java.lang.String clave, int tipo) {
+    private String registrar(java.lang.String userName, java.lang.String clave, int tipo) {
         ws.ServiciosEdutin port = service.getServiciosEdutinPort();
         return port.registrar(userName, clave, tipo);
     }
 
-    private  String registrarMateria(java.lang.String materia) {
-       
+    private String registrarMateria(java.lang.String materia) {
+
         ws.ServiciosEdutin port = service.getServiciosEdutinPort();
         return port.registrarMateria(materia);
     }
 
-    private  java.util.List<ws.Nota> listarNotas() {
-        
+    private java.util.List<ws.Nota> listarNotas() {
+
         ws.ServiciosEdutin port = service.getServiciosEdutinPort();
         return port.listarNotas();
     }
 
-    private  java.util.List<ws.Materia> listarMaterias() {
-      
+    private java.util.List<ws.Materia> listarMaterias() {
+
         ws.ServiciosEdutin port = service.getServiciosEdutinPort();
         return port.listarMaterias();
     }
 
-    private  java.util.List<ws.Docente> listarDocentes() {
-       
+    private java.util.List<ws.Docente> listarDocentes() {
+
         ws.ServiciosEdutin port = service.getServiciosEdutinPort();
         return port.listarDocentes();
     }
 
-    private  java.util.List<ws.Alumno> listarAlumnos() {
+    private java.util.List<ws.Alumno> listarAlumnos() {
         ws.ServiciosEdutin port = service.getServiciosEdutinPort();
         return port.listarAlumnos();
     }
 
-    private  java.util.List<ws.Usuario> listar() {
+    private java.util.List<ws.Usuario> listar() {
         ws.ServiciosEdutin port = service.getServiciosEdutinPort();
         return port.listar();
     }
 
-   
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
