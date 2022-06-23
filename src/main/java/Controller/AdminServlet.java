@@ -57,9 +57,9 @@ public class AdminServlet extends HttpServlet {
         List<Alumno> alumnos = listarAlumnos();
         List<Docente> docentes = listarDocentes();
         //List<Nota> notas = listarNotas();
-        List<Nota> notas = (List<Nota>) ListaDeFabrica("Nota");
+        List<Nota> notas = ListaDeFabrica("Nota");
         // List<Materia> materias = listarMaterias();
-        List<Materia> materias = (List<Materia>) ListaDeFabrica("Materia");
+        List<Materia> materias =  ListaDeFabrica("Materia");
         String opcionLista = request.getParameter("opLis");
         String opcionRegistrar = request.getParameter("opReg");
         opcionRegistrarTipo = request.getParameter("tipo");
@@ -194,7 +194,7 @@ public class AdminServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>// </editor-fold>
 
-    private List<?> ListaDeFabrica(java.lang.String Tipo) {
+    private List ListaDeFabrica(java.lang.String Tipo) {
         ws.ServiciosEdutin port = service.getServiciosEdutinPort();
         return port.listarFabrica(Tipo);
     }
