@@ -69,7 +69,7 @@
         </nav>
 
         <div id="div1"class="fadeIn first">
-            <img src="img/logo.png" id="icon" alt="User Icon" />
+            <img src="img/logo.PNG" id="icon" alt="User Icon" />
             <h1  style="display: inline-block" class="display-1 col-auto"> TU MEJOR OPCIÓN<%= username%> </h1>
         </div>
 
