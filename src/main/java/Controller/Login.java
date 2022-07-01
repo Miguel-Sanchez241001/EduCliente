@@ -91,14 +91,14 @@ public class Login extends HttpServlet {
 
                 request.setAttribute("username", username);
                 request.setAttribute("message", "La contraseña es incorrecta");
-                requestDispatcher = request.getRequestDispatcher("index.jsp");
+                requestDispatcher = request.getRequestDispatcher("login.jsp");
                 requestDispatcher.forward(request, response);
 
             }
         } else {
             request.setAttribute("username", username);
             request.setAttribute("message", "El usuario y/o contraseña son incorrectos");
-            requestDispatcher = request.getRequestDispatcher("index.jsp");
+            requestDispatcher = request.getRequestDispatcher("login.jsp");
             requestDispatcher.forward(request, response);
         }
 

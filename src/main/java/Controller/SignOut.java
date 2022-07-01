@@ -34,7 +34,7 @@ public class SignOut extends HttpServlet {
         HttpSession sesion = request.getSession();
         sesion.invalidate();
         request.setAttribute("message", "Se ha cerrado la sesión de forma correcta.");
-        requestDispatcher = request.getRequestDispatcher("index.jsp");
+        requestDispatcher = request.getRequestDispatcher("login.jsp");
         requestDispatcher.forward(request, response);
     }
 

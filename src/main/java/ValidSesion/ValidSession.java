@@ -35,7 +35,7 @@ public class ValidSession {
         }
         if (error) {
             request.setAttribute("message", ValidSession.mensaje);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
 
             try {
                 requestDispatcher.forward(request, response);
@@ -64,7 +64,7 @@ public class ValidSession {
         }
         if (error) {
             request.setAttribute("message", ValidSession.mensaje);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
 
             try {
                 requestDispatcher.forward(request, response);
@@ -93,7 +93,7 @@ public class ValidSession {
         }
         if (error) {
             request.setAttribute("message", ValidSession.mensaje);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
 
             try {
                 requestDispatcher.forward(request, response);
