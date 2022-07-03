@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://edutinservicio.edutin.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://edutinservicio.edutin.com/">
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.4.3 (RELEASE-2.4.3-ad3323c; 2019-01-21T17:46:06+0000) JAXWS-RI/2.3.2 JAXWS-API/2.3.2 JAXB-RI/2.3.2 JAXB-API/2.3.2 git-revision#unknown. --><xs:schema xmlns:tns="http://edutinservicio.edutin.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://edutinservicio.edutin.com/">
 
 <xs:element name="BuscarAlumno" type="tns:BuscarAlumno"/>
 
@@ -39,6 +39,10 @@
 <xs:element name="Loguear" type="tns:Loguear"/>
 
 <xs:element name="LoguearResponse" type="tns:LoguearResponse"/>
+
+<xs:element name="MensajeContacto" type="tns:MensajeContacto"/>
+
+<xs:element name="MensajeContactoResponse" type="tns:MensajeContactoResponse"/>
 
 <xs:element name="Registrar" type="tns:Registrar"/>
 
@@ -196,6 +200,22 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="MensajeContacto">
+<xs:sequence>
+<xs:element name="nombre" type="xs:string" minOccurs="0"/>
+<xs:element name="Apellido" type="xs:string" minOccurs="0"/>
+<xs:element name="correo" type="xs:string" minOccurs="0"/>
+<xs:element name="Telefono" type="xs:int" minOccurs="0"/>
+<xs:element name="Mensaje" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="MensajeContactoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="BuscarDocente">
 <xs:sequence>
 <xs:element name="idDocente" type="xs:string" minOccurs="0"/>
@@ -227,20 +247,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="Registrar">
-<xs:sequence>
-<xs:element name="UserName" type="xs:string" minOccurs="0"/>
-<xs:element name="Clave" type="xs:string" minOccurs="0"/>
-<xs:element name="Tipo" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="RegistrarResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="BuscarMateria">
 <xs:sequence>
 <xs:element name="idMateria" type="xs:int" minOccurs="0"/>
@@ -253,13 +259,17 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="ListarDocentes">
-<xs:sequence/>
+<xs:complexType name="Registrar">
+<xs:sequence>
+<xs:element name="UserName" type="xs:string" minOccurs="0"/>
+<xs:element name="Clave" type="xs:string" minOccurs="0"/>
+<xs:element name="Tipo" type="xs:int"/>
+</xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="ListarDocentesResponse">
+<xs:complexType name="RegistrarResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:docente" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -276,6 +286,16 @@
 <xs:complexType name="RegistrarAlumnoResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ListarDocentes">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="ListarDocentesResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:docente" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 

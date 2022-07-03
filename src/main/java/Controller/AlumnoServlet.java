@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.WebServiceRef;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
 import ws.Alumno;
 import ws.Docente;
 import ws.Nota;
@@ -26,6 +28,7 @@ public class AlumnoServlet extends HttpServlet {
 
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/EdutinServicio/ServiciosEdutin.wsdl")
     private ServiciosEdutin_Service service;
+    private static final Logger LOG = Logger.getLogger(AlumnoServlet.class.getName());
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,16 +40,17 @@ public class AlumnoServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        BasicConfigurator.configure();
         ValidSession.validAlumno(request, response);
         String alumno, nombre = null;
         alumno = request.getParameter("usuario");
 
         Integer opcion = Integer.parseInt(request.getParameter("opcion"));
 
-        System.out.println(alumno + " " + opcion + " ");
+        LOG.info(alumno + " " + opcion + " ");
 
         int idUserAlu = loguear(alumno).getId();
-        System.out.println(alumno + " " + idUserAlu);
+        LOG.info(alumno + " " + idUserAlu);
         List<Alumno> alumnos = listarAlumnos();
         for (Alumno alu : alumnos) {
             if (alu.getIdUser().getId() == idUserAlu) {

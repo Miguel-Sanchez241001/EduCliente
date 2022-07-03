@@ -6,7 +6,7 @@
 
 <%@page import="ws.Materia"%>
 <%@page import="ws.Alumno"%>
-<%@page import="ws.Docente"%>
+<%@page import="ws.Docente"%>   
 <%@page import="ws.Nota"%>
 <%@page import="ValidSesion.ValidSession"%>
 <%@page import="java.util.ArrayList"%>
@@ -275,11 +275,11 @@
 
                 <div class="form-group">
                     <label for="Username">Username</label>
-                    <input type="text" name="Username" class="form-control" placeholder="Username" id="Username">
+                    <input type="text" name="Username" class="form-control" placeholder="Ejm: admin1" id="Username">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Password" id="password">
+                    <input type="password" name="password" class="form-control" placeholder="******" id="password">
                 </div>
                 <input type="text" name="tipo" class="form-control" value="admin" hidden id="password">
 
@@ -316,7 +316,7 @@
                             for (Docente docente : docentes) {
                         %>              
 
-                        <option value="<%=docente.getId()%>"><%=docente.getNombre() + " " + docente.getId()%></option>
+                        <option value="<%=docente.getId()%>"><%=docente.getNombre()%></option>
                         <% }%>
 
                     </select>
