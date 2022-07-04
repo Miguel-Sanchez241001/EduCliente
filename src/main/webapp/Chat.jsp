@@ -20,12 +20,13 @@
         <meta charset="UTF-8"> 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
         <link rel="stylesheet" href="css/ChatStyle.css">
+         
     </head>
 
     <body>
         <header class="titulo">
             <h1>Sala de chat simple</h1>
-            <p id="xsxs"><%=Nombre%></p>
+            <p id="nombreUser"><%=Nombre%></p>
         </header>
 
 
@@ -35,7 +36,7 @@
         </div>
         <div class="col-sm-5">
             <form action="ChatSev" target="el-iframe">
-                <input type="text" id="in" name="message" class="form-control" value="" placeholder="Escriba aqui">
+                <input type="text" id="mensaje" name="message" class="form-control" value="" placeholder="Escriba aqui">
                 <div class="container">
                     <div class="row">
                         <div class="col">
@@ -61,120 +62,8 @@
                 display: None;
             }
         </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-<script  type="text/javascript">
-                    //function websocket(){
-                    var ws;
-                    var wsUri = "ws://localhost:8080/Edut/echo";
-                    ws = new WebSocket(wsUri);
-                    var authHeader;
-                    let nombre = document.getElementById('xsxs').innerHTML;
-                    const selector = document.getElementById('destinatario');
-                    const txtArea = document.querySelector('#mensajes');
-                    ws.onopen = function () {
-                       
-                        console.log(nombre);
-                        ws.send(nombre);// Este mensaje debe ser recibido por OnMessage en el servidor
-                    };
+<script src="js/Cliente.js"></script> 
         
-                    // Procesamiento de procesamiento de información después de la conexión
-                    ws.onmessage = function (message) {
-                        console.log({message});
-                       // writeToScreen(message.data);
-                       
-                        authHeader = message.data;
-                       
-                        if (message.data.startsWith("[") ) {
-                            let arr = authHeader.slice(1,-1);
-                            let arr3 = arr.split(', ');
-                            let arr4 = arr3.filter((item) => item !== nombre);
-                            console.log({arr4});
-                            let repeticion = false;
-                            remover();
-                            arr4.forEach(function(ar) {      
-                            console.log(ar);
-                                for (let i = 0; i < selector.length; i++) {
-                                    
-                                   if( selector[i].value === ar){
-                                       repeticion = true;
-                                        break;
-                                    }                       
-                                    
-                                }
-                                if (!repeticion) {
-                                    agregar(ar);
-                                }
-                                
-                            });
-                            
-                        }else{ 
-                            writeToScreen(message.data);
-                        }
-                    };
-                    //Remover opciones para las nuevas
-                    function remover(){
-                        const sel3 = document.getElementById('destinatario');
-                        for (var t=1; t<sel3.length; t++) {
-                                sel3.remove(t);
-                        }
-                    }
-                    //Funcion agregar option a select
-                    function agregar(valor){
-                         const option = document.createElement('option');
-                             option.value = valor;
-                             option.text = valor;
-                            selector.appendChild(option);
-                    }
-                    // Supervise el botón enviar para obtener la información enviada y enviar el objeto
-                    function button() {
-                        message = document.getElementById('in').value;
-                
-                towho = selector.value + "@";
-                       
-                ws.send(towho + message);
-                    }
-        
-                    // Cuando ocurre un error, maneje el error
-                    ws.onerror = function (evt) {
-                        writeToScreen('<span style="color:red;">ERROR:</span>' + evt.data);
-                        ws.close();
-                    };
-        
-                    // Mostrar información en la pantalla actual
-                    function writeToScreen(message) {
-                      /**  var pre = document.createElement("p");
-                        pre.style.wordWrap = "break-word";
-                        pre.innerHTML = message;
-                        output.appendChild(pre);
-         **/
-                        
-                        txtArea.value += message + '\n';
-                    }
-        
-                    // Ejecuta ws.close al cerrar la página
-                    window.onbeforeunload = function () {
-                        ws.close();
-                    };
-                    //  }
-        
-                </script>
+
     </body>
 </html>

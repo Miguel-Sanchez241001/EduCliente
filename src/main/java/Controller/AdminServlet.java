@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.WebServiceRef;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
 import ws.Alumno;
 import ws.Docente;
 import ws.Materia;
@@ -32,6 +34,7 @@ public class AdminServlet extends HttpServlet {
 
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/EdutinServicio/ServiciosEdutin.wsdl")
     private ServiciosEdutin_Service service;
+    private static final Logger LOG = Logger.getLogger(AdminServlet.class.getName());
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,7 +46,7 @@ public class AdminServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        BasicConfigurator.configure();
         ValidSession.validAdmin(request, response);
         String userName, clave, respuesta, nombre, apellido, opcionRegistrarTipo, DocenteN;
       
@@ -60,7 +63,7 @@ public class AdminServlet extends HttpServlet {
         opcionRegistrarTipo = request.getParameter("tipo");
 
         for (Docente docente : docentes) {
-            System.out.println(" " + docente.getId() + " " + docente.getNombre() + " " + docente.getApellido());
+            LOG.info(" " + docente.getId() + " " + docente.getNombre() + " " + docente.getApellido());
         }
 
         if (opcionLista != null) {
@@ -105,7 +108,7 @@ public class AdminServlet extends HttpServlet {
                     userName = request.getParameter("Username");
                     clave = request.getParameter("password");
                     respuesta = registrar(userName, clave, 1);
-                    System.out.println(respuesta);
+                    LOG.info(respuesta);
                     usuarios = listar();
                     request.setAttribute("lista", usuarios);
                     request.setAttribute("message", "1");
@@ -114,14 +117,14 @@ public class AdminServlet extends HttpServlet {
                     userName = request.getParameter("Username");
                     clave = request.getParameter("password");
                     respuesta = registrar(userName, clave, 2);
-                    System.out.println(respuesta);
+                    LOG.info(respuesta);
                     nombre = request.getParameter("Nombre");
                     apellido = request.getParameter("Apellido");
                     idMateria = Integer.parseInt(request.getParameter("Materia"));
-                    System.out.println(" " + nombre + " " + apellido + " " + idMateria + " ");
+                    LOG.info(" " + nombre + " " + apellido + " " + idMateria + " ");
                     respuesta = registrarDocente(loguear(userName).getId(), idMateria, nombre, apellido);
                     docentes = listarDocentes();    
-                    System.out.println(respuesta);
+                    LOG.info(respuesta);
                     request.setAttribute("lista", docentes);
                     request.setAttribute("message", "3");
                     break;
@@ -129,13 +132,13 @@ public class AdminServlet extends HttpServlet {
                     userName = request.getParameter("Username");
                     clave = request.getParameter("password");
                     respuesta = registrar(userName, clave, 3);
-                    System.out.println(respuesta);
+                    LOG.info(respuesta);
 
                     nombre = request.getParameter("Nombre");
                     apellido = request.getParameter("Apellido");
                     edad = Integer.parseInt(request.getParameter("pena"));
                     DocenteN = request.getParameter("Edad");
-                    System.out.println(" " + nombre + " " + apellido + " " + edad + " " + DocenteN);
+                    LOG.info(" " + nombre + " " + apellido + " " + edad + " " + DocenteN);
                     registrarAlumno(Integer.parseInt(DocenteN), nombre, apellido, edad, loguear(userName).getId());
                     alumnos = listarAlumnos();
                     request.setAttribute("lista", alumnos);

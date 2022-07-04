@@ -16,19 +16,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.WebServiceRef;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
 import ws.Alumno;
 import ws.Docente;
 import ws.Nota;
 import ws.ServiciosEdutin_Service;
 import ws.Usuario;
 
-
-
 @WebServlet(name = "Docente", urlPatterns = {"/Docente"})
 public class DocenteServlet extends HttpServlet {
 
-   @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/EdutinServicio/ServiciosEdutin.wsdl")
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/EdutinServicio/ServiciosEdutin.wsdl")
     private ServiciosEdutin_Service service;
+    private static final Logger LOG = Logger.getLogger(DocenteServlet.class.getName());
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,20 +41,22 @@ public class DocenteServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        BasicConfigurator.configure();
+
         ValidSession.validDocente(request, response);
         String docente, nombre = null;
         docente = request.getParameter("usuario");
         String opcion = request.getParameter("opcion");
-        System.out.println(docente + " " + opcion + " ");
+        LOG.info(docente + " " + opcion + " ");
         int idDocente = loguear(docente).getId();
-        System.out.println(" id doc " + idDocente);
+        LOG.info(" id doc " + idDocente);
         List<Docente> docentes = listarDocentes();
         int idMateria = 0;
         for (Docente alu : docentes) {
             if (alu.getUsuario().getId() == idDocente) {
                 nombre = alu.getNombre();
                 idMateria = alu.getMateria().getId();
-                System.out.println(" materia id: " + idMateria + " profe :" + nombre);
+                LOG.info(" materia id: " + idMateria + " profe :" + nombre);
             }
         }
         List<Nota> notas = listarNotas();
@@ -66,7 +69,7 @@ public class DocenteServlet extends HttpServlet {
         for (Alumno alum : alumnos) {
             if (alum.getIdDocente().getNombre().equals(nombre)) {
                 misAlumnos.add(alum);
-                System.out.println(misAlumnos);
+                LOG.info(misAlumnos);
                 for (Nota nota : notas) {
 
                     if (nota.getAlumno().getNombre().equals(alum.getNombre())) {
@@ -76,7 +79,7 @@ public class DocenteServlet extends HttpServlet {
                 }
             }
         }
-        System.out.println("lista " + misAlumnos);
+        LOG.info("lista " + misAlumnos);
         if (opcion != null) {
             switch (opcion) {
                 case "registro":
@@ -102,7 +105,7 @@ public class DocenteServlet extends HttpServlet {
             String alumno = (String) request.getParameter("Alumno");
             int Nota = Integer.parseInt((String) request.getParameter("Nota"));
             String res = registrarNota(idMateria, buscarAlumno(alumno).getIdAlumnos(), Nota);
-            System.out.println(res);
+            LOG.info(res);
 
             request.setAttribute("lista", misNotas);
             request.setAttribute("message", "3");

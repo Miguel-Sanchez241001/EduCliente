@@ -4,7 +4,6 @@
  */
 package Chat;
 
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,18 +16,17 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 import org.apache.log4j.BasicConfigurator;
 
-
 /**
  *
  * @author pc
  */
-@ServerEndpoint("/echo")
+@ServerEndpoint("/websocketserver")
 public class Servidor {
 
-    private boolean first = true;
-    private static String name;// Apodo del usuario
+    private boolean PrimeraVez = true;
+    private static String Nombre;// Apodo del usuario
     // la clave de conexión es el ID de la sesión, el valor es este objeto
-    private static final HashMap<String, Object> connect = new HashMap<String, Object>();
+    private static final HashMap<String, Object> ListaConexiones = new HashMap<String, Object>();
     // La clave userMap es el ID de la sesión, el valor es el nombre de usuario
     private static final HashMap<String, String> userMap = new HashMap<String, String>();
     private Session session;
@@ -37,25 +35,25 @@ public class Servidor {
     @OnOpen
     public void start(Session session) {
         this.session = session; // Obtén Seession y guárdalo en SashMap
-        connect.put(session.getId(), this);
+        ListaConexiones.put(session.getId(), this);
         BasicConfigurator.configure();
-   
+
     }
 
     @OnMessage
     public void echo(String incomingMessage, Session session) throws EncodeException {
         Servidor client = null;
         // Primero juzga si el valor se pasa por primera vez, el primer valor es el apodo, pasado por OnOpen en el lado web
-        if (first) {
-            this.name = incomingMessage;
-            String message = "Sistema : Bienvenido : " + name;
+        if (PrimeraVez) {
+            this.Nombre = incomingMessage;
+            String message = "Bienvenido  " + Nombre;
             // El apodo y la ID de sesión se almacenan en HashMap en una correspondencia uno a uno
-           logger.warn(message);
-            userMap.put(session.getId(), name);
+
+            userMap.put(session.getId(), Nombre);
             // Transmite el mensaje a todos los usuarios
-            for (String key : connect.keySet()) {
+            for (String key : ListaConexiones.keySet()) {
                 try {
-                    client = (Servidor) connect.get(key);
+                    client = (Servidor) ListaConexiones.get(key);
                     synchronized (client) {
                         // Envía un mensaje de texto a la web correspondiente
                         client.session.getBasicRemote().sendText(message);
@@ -64,7 +62,7 @@ public class Servidor {
                         client.session.getBasicRemote().sendText(Arrays.toString(userMap.values().toArray()));
                     }
                 } catch (IOException e) {
-                    connect.remove(client);
+                    ListaConexiones.remove(client);
                     try {
                         client.session.close();
                     } catch (IOException e1) {
@@ -72,7 +70,7 @@ public class Servidor {
                 }
             }
             // Después de ingresar el apodo, no es la primera vez para la posterior transferencia interactiva de valores
-            first = false;
+            PrimeraVez = false;
         } else {
             /**
              * El valor de InputMessage tiene el formato xxx @ xxxxx, xxx es el
@@ -87,7 +85,7 @@ public class Servidor {
                 boolean you = false;// Marcar si se encuentra el usuario remitente
                 for (String key : userMap.keySet()) {
                     if (list[0].equalsIgnoreCase(userMap.get(key))) {
-                        client = (Servidor) connect.get(key);
+                        client = (Servidor) ListaConexiones.get(key);
                         synchronized (client) {
                             try {
                                 // Enviar información al usuario especificado
@@ -126,19 +124,19 @@ public class Servidor {
     public void close(Session session) {
         // Cuando un usuario cierra la sesión, transmite a otros usuarios
         String message = "sistema: " + userMap.get(session.getId()) + " Salio del chat grupal";
-       logger.warn(message);
+
         userMap.remove(session.getId());
-        connect.remove(session.getId());
-        for (String key : connect.keySet()) {
+        ListaConexiones.remove(session.getId());
+        for (String key : ListaConexiones.keySet()) {
             Servidor client = null;
             try {
-                client = (Servidor) connect.get(key);
+                client = (Servidor) ListaConexiones.get(key);
                 synchronized (client) {
                     client.session.getBasicRemote().sendText(message);
                     client.session.getBasicRemote().sendText(Arrays.toString(userMap.values().toArray()));
                 }
             } catch (IOException e) {
-                connect.remove(client);
+                ListaConexiones.remove(client);
                 try {
                     client.session.close();
                 } catch (IOException e1) {
@@ -150,10 +148,10 @@ public class Servidor {
     // Difundir toda la información
     public static void sendAll(String mess, Session session) {
         String who = null;
-        for (String key : connect.keySet()) {
+        for (String key : ListaConexiones.keySet()) {
             Servidor client = null;
             try {
-                client = (Servidor) connect.get(key);
+                client = (Servidor) ListaConexiones.get(key);
                 if (key.equalsIgnoreCase(session.getId())) {
                     who = " Les dije a todos: ";
                 } else {
@@ -164,7 +162,7 @@ public class Servidor {
                     client.session.getBasicRemote().sendText(who + mess);
                 }
             } catch (IOException e) {
-                connect.remove(client);
+                ListaConexiones.remove(client);
                 try {
                     client.session.close();
                 } catch (IOException e1) {
@@ -174,8 +172,8 @@ public class Servidor {
 
     }
 
-    public String getName() {
-        return this.name;
+    public String getNombre() {
+        return this.Nombre;
     }
 
 }
