@@ -72,6 +72,10 @@ public class AlumnoServlet extends HttpServlet {
                     request.setAttribute("lista", docentes);
                     request.setAttribute("message", "2");
                     break;
+               case 3:
+                    
+                    request.setAttribute("message", "3");
+                    break;
             }
         }
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("mainAl.jsp");

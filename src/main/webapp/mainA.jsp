@@ -155,139 +155,17 @@
                 </tbody>
             </table>
         </div>
-        <% }%>              
-        <%
-            if (message.equals("1")) {
-                usuario = (List<Usuario>) request.getAttribute("lista");
-        %>
-        <div class=" container-sm w-75 mx-auto" style="   ">
-            <div class="row row-cols-8   row-cols-md-8 g-8">
-                <%
-                    for (Usuario us : usuario) {
-                %>
-                <div class="col p-2">
-                    <div class="card  ">
-                        <img src="https://imagoimpresiones.com/wp-content/uploads/2018/11/TERNO-2.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"> <td><%= us.getUsername()%></h5>
-                            <p class="card-text">Clave :<%= us.getClave()%></p>
-                            <%  if (us.getTipo() == 1) {
-                                    tipo = "Admin";
-                                } else {
-                                    if (us.getTipo() == 2) {
-                                        tipo = "Docente";
-                                    } else {
-                                        tipo = "Alumno";
-                                    }
-                                }
-                            %>
-                            <div class="card-footer">
-                                <small class="text-muted"><%= tipo%></small>
-                            </div>  
-
-                        </div>
-                    </div>
-                </div>
-                <%
-
-                    }
-
-                %>
-            </div>
-            <div class="row row-cols-5  row-cols-md-5 g-5">
-                <div class="col p-2">
-                    <div class="card ">
-                        <img src="https://imagoimpresiones.com/wp-content/uploads/2018/11/TERNO-2.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col p-2">
-                    <div class="card ">
-                        <img src="https://imagoimpresiones.com/wp-content/uploads/2018/11/TERNO-2.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col p-2">
-                    <div class="card  ">
-                        <img src="https://imagoimpresiones.com/wp-content/uploads/2018/11/TERNO-2.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col p-2">
-                    <div class="card  ">
-                        <img src="https://imagoimpresiones.com/wp-content/uploads/2018/11/TERNO-2.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col p-2">
-                    <div class="card  ">
-                        <img src="https://imagoimpresiones.com/wp-content/uploads/2018/11/TERNO-2.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="row row-cols-4   row-cols-md-4 g-4">
-                <div class="col p-2">
-                    <div class="card ">
-                        <img src="https://imagoimpresiones.com/wp-content/uploads/2018/11/TERNO-2.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col p-2">
-                    <div class="card  ">
-                        <img src="https://imagoimpresiones.com/wp-content/uploads/2018/11/TERNO-2.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col p-2">
-                    <div class="card  ">
-                        <img src="https://imagoimpresiones.com/wp-content/uploads/2018/11/TERNO-2.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col p-2">
-                    <div class="card  ">
-                        <img src="https://imagoimpresiones.com/wp-content/uploads/2018/11/TERNO-2.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <% }%>  
+        <% }%>   
+        
+      
+      
+       
         <!--TABLA DOCENTES-->
         <%
             if (message.equals("3")) {
                 docentes = (List<Docente>) request.getAttribute("lista");
         %>
-        <div class="container p- mb-2 bg-white ">
+        <div class="container p- mb-2  ">
             <table class="table table-dark table-striped">
                 <thead>
                     <tr>
@@ -352,17 +230,17 @@
             if (message.equals("5")) {
                 materias = (List<Materia>) request.getAttribute("lista");
         %>
-        <div class="container my-0" id="advanced-search-form">
+        <div class="container w-25 " id="advanced-search-form">
             <h2>Registrar Docente</h2>
             <form action="Admin" method="post">
 
                 <div class="form-group">
                     <label for="Nombre">Nombre</label>
-                    <input type="text" name="Nombre" class="form-control" placeholder="Nombre" id="Nombre">
+                    <input type="text" name="Nombre" class="form-control" placeholder="Ejm: Julian" id="Nombre">
                 </div>
                 <div class="form-group">
                     <label for="Apellido">Apellido</label>
-                    <input type="Apellido" name="Apellido" class="form-control" placeholder="Apellido" id="Apellido">
+                    <input type="Apellido" name="Apellido" class="form-control" placeholder="Ejmp. Fernandez" id="Apellido">
                 </div>
                 <div class="form-group">
                     <label for="Materia">Materia</label>
@@ -377,11 +255,11 @@
                 </div>
                 <div class="form-group">
                     <label for="Username">Username</label>
-                    <input type="text" name="Username" class="form-control" placeholder="Username" id="Username">
+                    <input type="text" name="Username" class="form-control" placeholder="Ejmp. juli" id="Username">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Password" id="password">
+                    <input type="password" name="password" class="form-control" placeholder="******" id="password">
                 </div>
                 <input type="text" name="tipo" class="form-control" value="docente" hidden id="password">
 
