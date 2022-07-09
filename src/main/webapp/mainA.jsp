@@ -84,7 +84,7 @@
             if (message.equals("1")) {
                 usuario = (List<Usuario>) request.getAttribute("lista");
         %>
-        <div class="container p- mb-2 bg-white ">
+        <div class="container  mb-2 bg-black ">
             <table class="table table-dark table-striped">
                 <thead>
                     <tr>
@@ -155,14 +155,17 @@
                 </tbody>
             </table>
         </div>
-        <% }%>               
-
+        <% }%>   
+        
+      
+      
+       
         <!--TABLA DOCENTES-->
         <%
             if (message.equals("3")) {
                 docentes = (List<Docente>) request.getAttribute("lista");
         %>
-        <div class="container p- mb-2 bg-white ">
+        <div class="container p- mb-2  ">
             <table class="table table-dark table-striped">
                 <thead>
                     <tr>
@@ -227,17 +230,17 @@
             if (message.equals("5")) {
                 materias = (List<Materia>) request.getAttribute("lista");
         %>
-        <div class="container my-0" id="advanced-search-form">
+        <div class="container w-25 " id="advanced-search-form">
             <h2>Registrar Docente</h2>
             <form action="Admin" method="post">
 
                 <div class="form-group">
                     <label for="Nombre">Nombre</label>
-                    <input type="text" name="Nombre" class="form-control" placeholder="Nombre" id="Nombre">
+                    <input type="text" name="Nombre" class="form-control" placeholder="Ejm: Julian" id="Nombre">
                 </div>
                 <div class="form-group">
                     <label for="Apellido">Apellido</label>
-                    <input type="Apellido" name="Apellido" class="form-control" placeholder="Apellido" id="Apellido">
+                    <input type="Apellido" name="Apellido" class="form-control" placeholder="Ejmp. Fernandez" id="Apellido">
                 </div>
                 <div class="form-group">
                     <label for="Materia">Materia</label>
@@ -252,11 +255,11 @@
                 </div>
                 <div class="form-group">
                     <label for="Username">Username</label>
-                    <input type="text" name="Username" class="form-control" placeholder="Username" id="Username">
+                    <input type="text" name="Username" class="form-control" placeholder="Ejmp. juli" id="Username">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Password" id="password">
+                    <input type="password" name="password" class="form-control" placeholder="******" id="password">
                 </div>
                 <input type="text" name="tipo" class="form-control" value="docente" hidden id="password">
 
